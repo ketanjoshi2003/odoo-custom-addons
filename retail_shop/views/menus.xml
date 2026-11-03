@@ -1,0 +1,3 @@
+<odoo>
+    <menuitem id="menu_retail_shop" name="Retail Shop" sequence="1"/>
+</odoo>

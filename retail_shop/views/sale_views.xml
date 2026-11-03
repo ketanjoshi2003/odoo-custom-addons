@@ -1,0 +1,80 @@
+<odoo>
+    <record id="view_sale_form" model="ir.ui.view">
+        <field name="name">Sale.form</field>
+        <field name="model">retail.sale</field>
+        <field name="arch" type="xml">
+            <form string="Sale">
+            <header>
+                <button
+                    name="action_confirm"
+                    string="Confirm"
+                    type="object"
+                    class="btn-primary"
+                    invisible="state != 'draft'"/>
+
+                <button
+                    name="action_cancel"
+                    string="Cancel"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="state == 'cancelled'"/>
+
+                <button
+                    name="action_reset_to_draft"
+                    string="Reset to Draft"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="state != 'cancelled'"/>
+
+                <field
+                    name="state"
+                    widget="statusbar"
+                    statusbar_visible="draft,confirmed,cancelled"/>
+            </header>
+                <sheet>
+                    <group>
+                        <field name="product_id" readonly="state != 'draft'"/>
+                        <field name="customer_id" readonly="state != 'draft'"/>
+                        <field name="date" readonly="state != 'draft'"/>
+                        <field name="quantity" readonly="state != 'draft'"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="price" readonly="state != 'draft'"/>
+                        <field name="discount" readonly="state != 'draft'"/>
+                        <field name="total_amount" readonly="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_sell_list" model="ir.ui.view">
+        <field name="name">Sale.list</field>
+        <field name="model">retail.sale</field>
+        <field name="arch" type="xml">
+            <list string="Sale">
+                <field name="product_id"/>
+                <field name="state"/>
+                <field name="customer_id"/>
+                <field name="date"/>
+                <field name="quantity"/>
+                <field name="currency_id" column_invisible="1"/>
+                <field name="price"/>
+                <field name="discount"/>
+                <field name="total_amount"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_sale" model="ir.actions.act_window">
+        <field name="name">Sale</field>
+        <field name="res_model">retail.sale</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem
+        id="menu_sale"
+        name="Sale"
+        parent="menu_retail_shop"
+        action="action_sale"
+        sequence="2"/>
+</odoo>

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_stock_user,stock.user,model_retail_stock,,1,1,1,1
+access_sale_user,sale.user,model_retail_sale,,1,1,1,1
+access_profit_user,profit.user,model_retail_profit,,1,1,1,1
+access_retail_product_user,retail.product.user,model_retail_product,,1,1,1,1
