@@ -18,8 +18,7 @@ class Stock(models.Model):
     default=lambda self: self.env.company.currency_id,
     )
 
-
-
+    
 
     @api.constrains('quantity', 'price')
     def _check_stock_values(self):

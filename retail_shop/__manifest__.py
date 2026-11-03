@@ -1,6 +1,6 @@
 {
     'name': 'Retail Shop',
-    'version': '2.0',
+    'version': '1.0',
     'summary': 'Retail Shop Management',
     'description': 'This module helps in managing retail shop operations.',
     'author': 'Ketan Joshi',
