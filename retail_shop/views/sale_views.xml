@@ -53,7 +53,12 @@
         <field name="arch" type="xml">
             <list string="Sale">
                 <field name="product_id"/>
-                <field name="state"/>
+                <field name="state" 
+                widget="badge" 
+                decoration-info="state == 'draft'"
+                decoration-success="state == 'confirmed'"
+                decoration-danger="state == 'cancelled'"/>
+
                 <field name="customer_id"/>
                 <field name="date"/>
                 <field name="quantity"/>

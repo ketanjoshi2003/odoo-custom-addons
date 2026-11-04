@@ -22,6 +22,13 @@ class Sale(models.Model):
                 raise ValidationError(
                     'Discount must be between 0 and 100 percent.'
                 )
+    name = fields.Char(
+    string='Sale Number',
+    required=True,
+    copy=False,
+    readonly=True,
+    default='New',
+    )
 
     product_id = fields.Many2one(
     'retail.product',
