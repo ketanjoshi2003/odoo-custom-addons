@@ -47,52 +47,74 @@
         </field>
     </record>
 
-    <record id="view_sell_list" model="ir.ui.view">
-        <field name="name">Sale.list</field>
-        <field name="model">retail.sale</field>
-        <field name="arch" type="xml">
-            <list string="Sale">
-                <field name="product_id"/>
-                <field name="state" 
-                widget="badge" 
-                decoration-info="state == 'draft'"
-                decoration-success="state == 'confirmed'"
-                decoration-danger="state == 'cancelled'"/>
-
-                <field name="customer_id"/>
-                <field name="date"/>
-                <field name="quantity"/>
-                <field name="currency_id" column_invisible="1"/>
-                <field name="price"/>
-                <field name="discount"/>
-                <field name="total_amount"/>
-            </list>
-        </field>
-    </record>
-
     <record id="view_retail_sale_kanban" model="ir.ui.view">
     <field name="name">retail.sale.kanban</field>
     <field name="model">retail.sale</field>
     <field name="arch" type="xml">
-        <kanban default_group_by="state">
+        <kanban
+            default_group_by="state"
+            class="o_kanban_small_column"
+            records_draggable="true">
+
+            <field name="name"/>
             <field name="state"/>
             <field name="product_id"/>
             <field name="customer_id"/>
+            <field name="date"/>
+            <field name="quantity"/>
+            <field name="discount"/>
             <field name="total_amount"/>
+            <field name="currency_id"/>
 
             <templates>
                 <t t-name="card">
-                    <div class="oe_kanban_card">
-                        <strong>
+                    <div class="oe_kanban_card oe_kanban_global_click">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+
+                            <field
+                                name="state"
+                                widget="badge"
+                                decoration-info="state == 'draft'"
+                                decoration-success="state == 'confirmed'"
+                                decoration-danger="state == 'cancelled'"
+                            />
+                        </div>
+
+                        <div class="mb-2">
+                            <strong>Product:</strong>
                             <field name="product_id"/>
-                        </strong>
-                        <div>
-                            Customer:
+                        </div>
+
+                        <div class="text-muted">
+                            <strong>Customer:</strong>
                             <field name="customer_id"/>
                         </div>
-                        <div>
-                            Total:
-                            <field name="total_amount"/>
+
+                        <div class="text-muted">
+                            <strong>Date:</strong>
+                            <field name="date"/>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <span>
+                                Quantity:
+                                <strong><field name="quantity"/></strong>
+                            </span>
+
+                            <span>
+                                Discount:
+                                <strong><field name="discount"/>%</strong>
+                            </span>
+                        </div>
+
+                        <div class="mt-3">
+                            <span class="text-muted">Total</span>
+                            <h4 class="text-primary mb-0">
+                                <field name="total_amount"/>
+                            </h4>
                         </div>
                     </div>
                 </t>
@@ -101,10 +123,21 @@
     </field>
     </record>
 
+    <record id="view_retail_sale_graph" model="ir.ui.view">
+    <field name="name">retail.sale.graph</field>
+    <field name="model">retail.sale</field>
+    <field name="arch" type="xml">
+        <graph string="Sales Analysis" type="bar">
+            <field name="date" interval="month" type="row"/>
+            <field name="total_amount" type="measure"/>
+        </graph>
+    </field>
+    </record>
+
     <record id="action_sale" model="ir.actions.act_window">
         <field name="name">Sale</field>
         <field name="res_model">retail.sale</field>
-        <field name="view_mode">list,kanban,form</field>
+        <field name="view_mode">kanban,list,graph,form</field>
     </record>
 
     <menuitem
