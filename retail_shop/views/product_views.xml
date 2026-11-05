@@ -6,13 +6,21 @@
             <form string="Product">
                 <sheet>
                     <group>
+                    
                         <field name="name"/>
+
                         <field name="sku"/>
+
                         <field name="available_quantity" readonly="1"/>
+
                         <field name="sale_price"/>
+
                         <field name="cost_price"/>
+
                         <field name="currency_id" invisible="1"/>
+
                         <field name="active"/>
+
                     </group>
                 </sheet>
             </form>
@@ -25,12 +33,20 @@
         <field name="arch" type="xml">
             <list string="Products">
                 <field name="name"/>
+
                 <field name="sku"/>
+
                 <field name="available_quantity" readonly="1"/>
+
                 <field name="currency_id" column_invisible="1"/>
+
+
                 <field name="sale_price"/>
+
                 <field name="cost_price"/>
+
                 <field name="active"/>
+
             </list>
         </field>
     </record>
@@ -40,13 +56,21 @@
     <field name="model">retail.product</field>
     <field name="arch" type="xml">
         <kanban class="o_kanban_small_column">
+
             <field name="name"/>
+
             <field name="sku"/>
+
             <field name="available_quantity"/>
+
             <field name="sale_price"/>
+
             <field name="cost_price"/>
+
             <field name="currency_id"/>
+
             <field name="active"/>
+
 
             <templates>
                 <t t-name="card">

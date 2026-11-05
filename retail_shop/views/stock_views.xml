@@ -6,12 +6,19 @@
             <form string="Stock">
                 <sheet>
                     <group>
+
                         <field name="name"/>
+
                         <field name="product_id"/>
+
                         <field name="quantity"/>
+
                         <field name="date"/>
+
                         <field name="currency_id" invisible="1"/>
+
                         <field name="price"/>
+
                     </group>
                 </sheet>
             </form>
@@ -23,12 +30,19 @@
         <field name="model">retail.stock</field>
         <field name="arch" type="xml">
             <list string="Stock">
+
                 <field name="name"/>
+
                 <field name="product_id"/>
+
                 <field name="quantity"/>
+
                 <field name="date"/>
+
                 <field name="currency_id" column_invisible="1"/>
+
                 <field name="price"/>
+
             </list>
         </field>
     </record>
@@ -38,10 +52,15 @@
     <field name="model">retail.stock</field>
     <field name="arch" type="xml">
         <kanban class="o_kanban_small_column">
+
             <field name="product_id"/>
+
             <field name="quantity"/>
+
             <field name="price"/>
+
             <field name="currency_id"/>
+
             <field name="date"/>
 
             <templates>

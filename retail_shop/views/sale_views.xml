@@ -34,13 +34,21 @@
                 <sheet>
                     <group>
                         <field name="product_id" readonly="state != 'draft'"/>
+                        
                         <field name="customer_id" readonly="state != 'draft'"/>
+                        
                         <field name="date" readonly="state != 'draft'"/>
+                        
                         <field name="quantity" readonly="state != 'draft'"/>
+                        
                         <field name="currency_id" invisible="1"/>
+                        
                         <field name="price" readonly="state != 'draft'"/>
+                        
                         <field name="discount" readonly="state != 'draft'"/>
+                        
                         <field name="total_amount" readonly="1"/>
+                        
                     </group>
                 </sheet>
             </form>
@@ -57,14 +65,23 @@
             records_draggable="true">
 
             <field name="name"/>
+
             <field name="state"/>
+
             <field name="product_id"/>
+
             <field name="customer_id"/>
+
             <field name="date"/>
+
             <field name="quantity"/>
+
             <field name="discount"/>
+
             <field name="total_amount"/>
+
             <field name="currency_id"/>
+
 
             <templates>
                 <t t-name="card">

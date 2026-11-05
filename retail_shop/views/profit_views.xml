@@ -6,10 +6,15 @@
             <form string="Profit">
                 <sheet>
                     <group>
+
                         <field name="sale_id"/>
+
                         <field name="date"/>
+
                         <field name="currency_id" invisible="1"/>
+
                         <field name="profit_amount" readonly="1"/>
+
                     </group>
                 </sheet>
             </form>
@@ -20,13 +25,21 @@
         <field name="name">profit.list</field>
         <field name="model">retail.profit</field>
         <field name="arch" type="xml">
+
             <list string="Profit">
+
                 <field name="sale_id"/>
+
                 <field name="currency_id" column_invisible="1"/>
+
                 <field name="profit_amount"/>
+
                 <field name="date"/>
+
             </list>
+
         </field>
+
     </record>
 
     <record id="view_retail_profit_kanban" model="ir.ui.view">
