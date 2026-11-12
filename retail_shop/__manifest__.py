@@ -14,6 +14,7 @@
     'views/stock_views.xml',
     'views/sale_views.xml',
     'views/profit_views.xml',
+    'views/tags_view.xml',
     ],
 
     'depends': ['base'],

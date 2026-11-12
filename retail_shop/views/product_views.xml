@@ -38,7 +38,7 @@
 
                 <field name="available_quantity" readonly="1"/>
 
-                <field name="currency_id" colum n_invisible="1"/>
+                <field name="currency_id" column_invisible="1"/>
 
                 <field name="sale_price"/>
 

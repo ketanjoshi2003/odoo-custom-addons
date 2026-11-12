@@ -30,6 +30,14 @@ class Sale(models.Model):
     default='New',
     )
 
+    tag_ids = fields.Many2many(
+    'retail.sale.tag',
+    'retail_sale_tag_rel',
+    'sale_id',
+    'tag_id',
+    string='Tags',
+    )
+
     product_id = fields.Many2one(
     'retail.product',
     string='Product',

@@ -33,6 +33,11 @@
             </header>
                 <sheet>
                     <group>
+
+                        <field name="name" readonly="1"/>   
+
+                        <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" readonly="state != 'draft'"/>
+                        
                         <field name="product_id" readonly="state != 'draft'"/>
                         
                         <field name="customer_id" readonly="state != 'draft'"/>
@@ -90,15 +95,14 @@
                             <strong>
                                 <field name="name"/>
                             </strong>
-
-                            <field
-                                name="state"
-                                widget="badge"
-                                decoration-info="state == 'draft'"
-                                decoration-success="state == 'confirmed'"
-                                decoration-danger="state == 'cancelled'"
-                            />
-                        </div>
+                                <field
+                                    name="state"
+                                    widget="badge"
+                                    decoration-info="state == 'draft'"
+                                    decoration-success="state == 'confirmed'"
+                                    decoration-danger="state == 'cancelled'"
+                                />
+                         </div>
 
                         <div class="mb-2">
                             <strong>Product:</strong>
@@ -132,8 +136,19 @@
                             <h4 class="text-primary mb-0">
                                 <field name="total_amount"/>
                             </h4>
+
+                                <div class="mt-2">
+                            <strong>Tags:</strong>
+                                <field
+                                    name="tag_ids"
+                                    widget="many2many_tags"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </div>
+                            
                         </div>
                     </div>
+
                 </t>
             </templates>
         </kanban>
@@ -151,11 +166,43 @@
     </field>
     </record>
 
+    <record id="view_retail_sale_calendar" model="ir.ui.view">
+    <field name="name">retail.sale.calendar</field>
+    <field name="model">retail.sale</field>
+    <field name="arch" type="xml">
+        <calendar
+            string="Sales Calendar"
+            date_start="date"
+            color="state">
+            <field name="name"/>
+            <field name="product_id"/>
+            <field name="customer_id"/>
+            <field name="total_amount"/>
+            <field name="state"/>
+        </calendar>
+    </field>
+    </record>
+
+    <record id="view_retail_sale_pivot" model="ir.ui.view">
+    <field name="name">retail.sale.pivot</field>
+    <field name="model">retail.sale</field>
+    <field name="arch" type="xml">
+        <pivot string="Sales Analysis">
+            <field name="date" type="row" interval="month"/>
+            <field name="product_id" type="row"/>
+            <field name="customer_id" type="col"/>
+            <field name="quantity" type="measure"/>
+            <field name="total_amount" type="measure"/>
+        </pivot>
+    </field>
+    </record>
+
     <record id="action_sale" model="ir.actions.act_window">
         <field name="name">Sale</field>
         <field name="res_model">retail.sale</field>
-        <field name="view_mode">kanban,list,graph,form</field>
+        <field name="view_mode">kanban,list,graph,calendar,pivot,form</field>
     </record>
+    
 
     <menuitem
         id="menu_sale"

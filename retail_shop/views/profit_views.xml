@@ -32,7 +32,7 @@
 
                 <field name="currency_id" column_invisible="1"/>
 
-                <field name="profit_amount"/>
+                <field name="profit_amount" sum="Total Profit"/>
 
                 <field name="date"/>
 
@@ -76,6 +76,17 @@
             </templates>
         </kanban>
     </field>
+    </record>
+
+    <record id="view_retail_profit_graph" model="ir.ui.view">
+        <field name="name">retail.profit.graph</field>
+        <field name="model">retail.profit</field>
+        <field name="arch" type="xml">
+            <graph string="Profit by Sale" type="bar">
+                <field name="sale_id" type="row"/>
+                <field name="profit_amount" type="measure"/>
+            </graph>
+        </field>
     </record>
 
     <record id="action_profit" model="ir.actions.act_window">
