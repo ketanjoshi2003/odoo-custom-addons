@@ -17,8 +17,8 @@ class Stock(models.Model):
     )
     image = fields.Binary(
         string='Image',
-        related = 'product_id.image',
-        readonly = 'True'
+        related='product_id.image',
+        readonly=True,
     )
     @api.constrains('quantity', 'price')
     def _check_stock_values(self):
