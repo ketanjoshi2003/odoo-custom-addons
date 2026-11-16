@@ -15,6 +15,11 @@ class Stock(models.Model):
     required=True,
     default=lambda self: self.env.company.currency_id,
     )
+    image = fields.Binary(
+        string='Image',
+        related = 'product_id.image',
+        readonly = 'True'
+    )
     @api.constrains('quantity', 'price')
     def _check_stock_values(self):
         for stock in self:

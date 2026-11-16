@@ -36,6 +36,7 @@
     <field name="model">retail.stock</field>
     <field name="arch" type="xml">
         <kanban class="o_kanban_small_column">
+            <field name="image"/>
             <field name="product_id"/>
             <field name="quantity"/>
             <field name="price"/>
@@ -44,6 +45,7 @@
             <templates>
                 <t t-name="card">
                     <div class="oe_kanban_card oe_kanban_global_click">
+                        <field name="image" widget="image" class="oe_avatar"/>
                         <div class="d-flex justify-content-between align-items-center mb-2">
                             <strong>
                                 <field name="product_id"/>

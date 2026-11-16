@@ -50,8 +50,8 @@
             <templates>
                 <t t-name="card">
                     <div class="oe_kanban_card oe_kanban_global_click">
+                        <field name="image" widget="image" class="oe_avatar"/>
                         <div class="d-flex justify-content-between align-items-center mb-2">
-                            <field name="image" widget="image" class="oe_avatar"/>
                             <strong>
                                 <field name="name"/>
                             </strong>
