@@ -13,3 +13,7 @@ __pycache__/
 
 # Odoo logs / temporary files
 *.log
+
+# Independent local modules
+/dev_mall/
+/student_management/
