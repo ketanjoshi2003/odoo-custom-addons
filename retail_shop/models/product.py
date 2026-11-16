@@ -7,6 +7,10 @@ class RetailProduct(models.Model):
     _description = 'Retail Product'
     _order = 'name'
     
+    image = fields.Binary(
+        string='Image', 
+        attachment=True
+        )
 
     name = fields.Char(
         string='Product Name',
