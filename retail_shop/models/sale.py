@@ -46,8 +46,9 @@ class Sale(models.Model):
     required=True,
     ondelete='restrict',
     )
-    date = fields.Date(
-    string='Date', required=True
+    datetime = fields.Datetime(
+    string='DateTime', required=True,
+    default=fields.Datetime.now,
     )
     @api.onchange('product_id')
     def _onchange_product_id(self):
@@ -74,6 +75,7 @@ class Sale(models.Model):
     'res.currency',
     string='Currency',
     required=True,
+    readonly=True,
     default=lambda self: self.env.company.currency_id,
     )
     state = fields.Selection(

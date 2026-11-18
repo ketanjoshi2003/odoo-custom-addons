@@ -11,7 +11,15 @@ class Profit(models.Model):
     ondelete='restrict',
     domain=[('state', '=', 'confirmed')],
     )
-    date = fields.Date(string='Date', required=True)
+    _unique_sale = models.Constraint(
+    'UNIQUE(sale_id)',
+    'A profit record already exists for this sale.',
+    )
+    date = fields.Date(
+    string='Date',
+    required=True,
+    default=fields.Date.context_today,
+    )
     profit_amount = fields.Monetary(
     string='Profit Amount',
     compute='_compute_profit_amount',
@@ -21,6 +29,7 @@ class Profit(models.Model):
     'res.currency',
     string='Currency',
     required=True,
+    readonly=True,
     default=lambda self: self.env.company.currency_id,
     )
     @api.depends(

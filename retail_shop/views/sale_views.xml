@@ -34,7 +34,7 @@
                         <field name="tag_ids" widget="many2many_tags" options="{'color_field': 'color'}" readonly="state != 'draft'"/>
                         <field name="product_id" readonly="state != 'draft'"/>
                         <field name="customer_id" readonly="state != 'draft'"/>
-                        <field name="date" readonly="state != 'draft'"/>
+                        <field name="datetime" readonly="state != 'draft'"/>
                         <field name="quantity" readonly="state != 'draft'"/>
                         <field name="currency_id" invisible="1"/>
                         <field name="price" readonly="state != 'draft'"/>
@@ -57,7 +57,7 @@
             <field name="state"/>
             <field name="product_id"/>
             <field name="customer_id"/>
-            <field name="date"/>
+            <field name="datetime"/>
             <field name="quantity"/>
             <field name="discount"/>
             <field name="total_amount"/>
@@ -86,8 +86,8 @@
                             <field name="customer_id"/>
                         </div>
                         <div class="text-muted">
-                            <strong>Date:</strong>
-                            <field name="date"/>
+                            <strong>DateTime:</strong>
+                            <field name="datetime"/>
                         </div>
                         <div class="d-flex justify-content-between mt-3">
                             <span>
@@ -124,7 +124,7 @@
     <field name="model">retail.sale</field>
     <field name="arch" type="xml">
         <graph string="Sales Analysis" type="bar">
-            <field name="date" interval="month" type="row"/>
+            <field name="datetime" interval="month" type="row"/>
             <field name="total_amount" type="measure"/>
         </graph>
     </field>
@@ -135,7 +135,7 @@
     <field name="arch" type="xml">
         <calendar
             string="Sales Calendar"
-            date_start="date"
+            date_start="datetime"
             color="state">
             <field name="name"/>
             <field name="product_id"/>
@@ -150,7 +150,7 @@
     <field name="model">retail.sale</field>
     <field name="arch" type="xml">
         <pivot string="Sales Analysis">
-            <field name="date" type="row" interval="month"/>
+            <field name="datetime" type="row" interval="month"/>
             <field name="product_id" type="row"/>
             <field name="customer_id" type="col"/>
             <field name="quantity" type="measure"/>

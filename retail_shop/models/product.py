@@ -55,6 +55,7 @@ class RetailProduct(models.Model):
         'res.currency',
         string='Currency',
         required=True,
+        readonly=True,
         default=lambda self: self.env.company.currency_id,
     )
     active = fields.Boolean(
