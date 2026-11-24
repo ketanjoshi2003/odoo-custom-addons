@@ -50,6 +50,14 @@ class Sale(models.Model):
     string='DateTime', required=True,
     default=fields.Datetime.now,
     )
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if vals.get('name', 'New') == 'New':
+                vals['name'] = (
+                    self.env['ir.sequence'].next_by_code('retail.sale') or 'New'
+                )
+        return super().create(vals_list)
     @api.onchange('product_id')
     def _onchange_product_id(self):
         if self.product_id:

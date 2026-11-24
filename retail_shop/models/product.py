@@ -21,28 +21,28 @@ class RetailProduct(models.Model):
     'UNIQUE(sku)',
     'SKU must be unique.',
     )
+    stock_ids = fields.One2many(
+        'retail.stock',
+        'product_id',
+        string='Stock Records',
+    )
+    sale_ids = fields.One2many(
+        'retail.sale',
+        'product_id',
+        string='Sales',
+    )
     available_quantity = fields.Integer(
-    string='Available Quantity',
-    compute='_compute_available_quantity',
+        string='Available Quantity',
+        compute='_compute_available_quantity',
     )
-    @api.depends(
-    'stock_ids.quantity',
-    )
+    @api.depends('stock_ids.quantity', 'sale_ids.quantity', 'sale_ids.state')
     def _compute_available_quantity(self):
         for product in self:
             incoming_quantity = sum(product.stock_ids.mapped('quantity'))
-            sold_quantity = sum(
-                self.env['retail.sale'].search([
-                    ('product_id', '=', product.id),
-                    ('state', '=', 'confirmed'),
-                ]).mapped('quantity')
-            )
+            sold_quantity = sum(product.sale_ids.filtered(
+                lambda sale: sale.state == 'confirmed'
+            ).mapped('quantity'))
             product.available_quantity = incoming_quantity - sold_quantity
-    stock_ids = fields.One2many(
-    'retail.stock',
-    'product_id',
-    string='Stock Records',
-    )
     sale_price = fields.Monetary(
         string='Selling Price',
         required=True,
