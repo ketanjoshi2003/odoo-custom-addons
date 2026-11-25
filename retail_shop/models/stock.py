@@ -17,10 +17,10 @@ class Stock(models.Model):
     string='Product',
     required=True
     )
-    date = fields.Date(
+    date = fields.Datetime(
     string='Date',
     required=True,
-    default=fields.Date.context_today,
+    default=fields.Datetime.now,
     )
     price = fields.Monetary(
     string='Price',
@@ -49,3 +49,19 @@ class Stock(models.Model):
                 raise ValidationError(
                     'Stock price cannot be negative.'
                 )
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        self.env['retail.stock.move'].create([
+            {
+                'product_id':rec.product_id.id,
+                'quantity':rec.quantity,
+                'move_type':'in',
+                'stock_id':rec.id,
+                'reference':rec.name,
+                'date':rec.date,
+            }
+            for rec in records
+        ])
+        return records

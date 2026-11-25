@@ -4,3 +4,4 @@ access_sale_user,sale.user,model_retail_sale,base.group_user,1,1,1,1
 access_profit_user,profit.user,model_retail_profit,base.group_user,1,1,1,1
 access_retail_product_user,retail.product.user,model_retail_product,base.group_user,1,1,1,1
 access_retail_sale_tag_user,retail.sale.tag.user,model_retail_sale_tag,base.group_user,1,1,1,1
+access_stock_move_user,retail.stock.move.user,model_retail_stock_move,base.group_user,1,1,1,1

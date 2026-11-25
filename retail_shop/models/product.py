@@ -31,18 +31,19 @@ class RetailProduct(models.Model):
         'product_id',
         string='Sales',
     )
+    move_ids = fields.One2many('retail.stock.move','product_id',string='Stock Movements')
+
     available_quantity = fields.Integer(
         string='Available Quantity',
         compute='_compute_available_quantity',
+        store=True,
     )
-    @api.depends('stock_ids.quantity', 'sale_ids.quantity', 'sale_ids.state')
+
+    @api.depends('move_ids.quantity')
     def _compute_available_quantity(self):
         for product in self:
-            incoming_quantity = sum(product.stock_ids.mapped('quantity'))
-            sold_quantity = sum(product.sale_ids.filtered(
-                lambda sale: sale.state == 'confirmed'
-            ).mapped('quantity'))
-            product.available_quantity = incoming_quantity - sold_quantity
+            product.available_quantity = sum(product.move_ids.mapped('quantity'))
+
     sale_price = fields.Monetary(
         string='Selling Price',
         required=True,

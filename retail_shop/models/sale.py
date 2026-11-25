@@ -127,3 +127,35 @@ class Sale(models.Model):
             gross_amount = sale.quantity * sale.price
             discount_amount = gross_amount * sale.discount / 100
             sale.total_amount = gross_amount - discount_amount
+
+    def write(self, vals):
+        transitions = []
+        if 'state' in vals:
+            for sale in self:
+                old = sale.state
+                new = vals['state']
+                if old != new:
+                    transitions.append((sale, old, new))
+                    if new == 'confirmed' and old == 'draft':
+                        if sale.product_id.available_quantity < sale.quantity:
+                            raise ValidationError(
+                                'Not enough stock available for this product.'
+                            )
+        result = super().write(vals)
+        for sale, old, new in transitions:
+            if new == 'confirmed' and old == 'draft':
+                self._create_stock_move(sale, -sale.quantity, 'out')
+            elif new == 'cancelled' and old == 'confirmed':
+                self._create_stock_move(sale, sale.quantity, 'return')
+        return result
+
+    def _create_stock_move(self, sale, qty, move_type):
+        self.env['retail.stock.move'].create({
+            'product_id': sale.product_id.id,
+            'quantity': qty,
+            'move_type': move_type,
+            'sale_id': sale.id,
+            'reference': sale.name,
+        })
+
+

@@ -11,6 +11,7 @@
     'security/ir.model.access.csv',
     'data/sale_sequence.xml',
     'views/menus.xml',
+    'views/stock_move_view.xml',
     'views/product_views.xml',
     'views/stock_views.xml',
     'views/sale_views.xml',

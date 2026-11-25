@@ -78,6 +78,6 @@
         id="menu_profit"
         name="Profit"
         parent="menu_retail_shop"
-        sequence="3"
+        sequence="5"
         action="action_profit"/>
 </odoo>
