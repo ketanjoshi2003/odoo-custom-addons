@@ -4,8 +4,8 @@
         <field name="model">retail.sale.tag</field>
         <field name="arch" type="xml">
             <list string="Sale Tags">
-                <field name="name"/>
-                <field name="color"/>
+                <field name="name" />
+                <field name="color" />
             </list>
         </field>
     </record>
@@ -16,8 +16,8 @@
             <form string="Sale Tag">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="color"/>
+                        <field name="name" />
+                        <field name="color" />
                     </group>
                 </sheet>
             </form>
@@ -33,5 +33,5 @@
         name="Sale Tags"
         parent="menu_retail_shop"
         action="action_retail_sale_tag"
-        sequence="6"/>
+        sequence="6" />
 </odoo>

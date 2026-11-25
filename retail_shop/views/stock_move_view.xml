@@ -6,13 +6,13 @@
             <form string="Stock">
                 <sheet>
                     <group>
-                      <field name='product_id'/>
-                      <field name='quantity'/>
-                      <field name='move_type'/>
-                      <field name='date'/>
-                      <field name='sale_id'/>
-                      <field name='stock_id'/>
-                      <field name='reference'/>
+                        <field name='product_id' />
+                        <field name='quantity' />
+                        <field name='move_type' />
+                        <field name='date' />
+                        <field name='sale_id' />
+                        <field name='stock_id' />
+                        <field name='reference' />
                     </group>
                 </sheet>
             </form>
@@ -23,54 +23,63 @@
         <field name="model">retail.stock.move</field>
         <field name="arch" type="xml">
             <list string="Stock">
-                    <field name='product_id'/>
-                    <field name='quantity'/>
-                    <field name='move_type'/>
-                    <field name='date'/>
-                    <field name='sale_id'/>
-                    <field name='stock_id'/>
-                    <field name='reference'/>
+                <field name='product_id' />
+                <field name='quantity' />
+                <field name='move_type' />
+                <field name='date' />
+                <field name='sale_id' />
+                <field name='stock_id' />
+                <field name='reference' />
             </list>
         </field>
     </record>
     <record id="view_retail_stock_move_kanban" model="ir.ui.view">
-    <field name="name">retail.stock.move.kanban</field>
-    <field name="model">retail.stock.move</field>
-    <field name="arch" type="xml">
-        <kanban class="o_kanban_small_column">
-            <field name="product_id"/>
-            <field name="date"/>
-            <field name="quantity"/>
-            <templates>
-                <t t-name="card">
-                    <div class="oe_kanban_card oe_kanban_global_click">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <strong>
-                                <field name="product_id"/>
-                            </strong>
-                            <field name="date"/>
+        <field name="name">retail.stock.move.kanban</field>
+        <field name="model">retail.stock.move</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column">
+                <field name="product_id" />
+                <field name="date" />
+                <field name="quantity" />
+                <field name="move_type" />
+                <field name="reference" />
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong>
+                                    <field name="product_id" />
+                                </strong>
+                                <field name="date" />
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-muted">Quantity</span>
+                                <h4 class="text-primary mb-0">
+                                    <field name="quantity" />
+                                </h4>
+                                <div class="mt-2">
+                                    <span class="badge bg-secondary">
+                                        <field name="move_type" />
+                                    </span>
+                                </div>
+                                <div class="text-muted mt-2"> Ref: <field name="reference" />
+                                </div>
+                            </div>
                         </div>
-                        <div class="mt-3">
-                            <span class="text-muted">Quantity</span>
-                            <h4 class="text-primary mb-0">
-                                <field name="quantity"/>
-                            </h4>
-                        </div>
-                    </div>
-                </t>
-            </templates>
-        </kanban>
-    </field>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
     </record>
     <record id="action_stock_move" model="ir.actions.act_window">
         <field name="name">Stock Movement</field>
         <field name="res_model">retail.stock.move</field>
-        <field name="view_mode">kanban,list,form</field>
+        <field name="view_mode">list,kanban,form</field>
     </record>
     <menuitem
         id="menu_stock_move"
         name="Stock Movement"
         parent="menu_retail_shop"
         action="action_stock_move"
-        sequence="2"/>
+        sequence="2" />
 </odoo>

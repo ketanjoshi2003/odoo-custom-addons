@@ -6,10 +6,10 @@
             <form string="Profit">
                 <sheet>
                     <group>
-                        <field name="sale_id"/>
-                        <field name="date"/>
-                        <field name="currency_id" invisible="1"/>
-                        <field name="profit_amount" readonly="1"/>
+                        <field name="sale_id" />
+                        <field name="date" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="profit_amount" readonly="1" />
                     </group>
                 </sheet>
             </form>
@@ -20,52 +20,50 @@
         <field name="model">retail.profit</field>
         <field name="arch" type="xml">
             <list string="Profit">
-                <field name="sale_id"/>
-                <field name="currency_id" column_invisible="1"/>
-                <field name="profit_amount" sum="Total Profit"/>
-                <field name="date"/>
+                <field name="sale_id" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="profit_amount" sum="Total Profit" />
+                <field name="date" />
             </list>
         </field>
     </record>
     <record id="view_retail_profit_kanban" model="ir.ui.view">
-    <field name="name">retail.profit.kanban</field>
-    <field name="model">retail.profit</field>
-    <field name="arch" type="xml">
-        <kanban class="o_kanban_small_column">
-            <field name="sale_id"/>
-            <field name="date"/>
-            <field name="profit_amount"/>
-            <field name="currency_id"/>
-            <templates>
-                <t t-name="card">
-                    <div class="oe_kanban_card oe_kanban_global_click">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <strong>Profit Record</strong>
-                            <field name="date"/>
+        <field name="name">retail.profit.kanban</field>
+        <field name="model">retail.profit</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_small_column">
+                <field name="sale_id" />
+                <field name="date" />
+                <field name="profit_amount" />
+                <field name="currency_id" />
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_card oe_kanban_global_click">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <strong>Profit Record</strong>
+                                <field name="date" />
+                            </div>
+                            <div class="text-muted"> Sale: <field name="sale_id" />
+                            </div>
+                            <div class="mt-3">
+                                <span class="text-muted">Profit</span>
+                                <h4 class="text-success mb-0">
+                                    <field name="profit_amount" />
+                                </h4>
+                            </div>
                         </div>
-                        <div class="text-muted">
-                            Sale:
-                            <field name="sale_id"/>
-                        </div>
-                        <div class="mt-3">
-                            <span class="text-muted">Profit</span>
-                            <h4 class="text-success mb-0">
-                                <field name="profit_amount"/>
-                            </h4>
-                        </div>
-                    </div>
-                </t>
-            </templates>
-        </kanban>
-    </field>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
     </record>
     <record id="view_retail_profit_graph" model="ir.ui.view">
         <field name="name">retail.profit.graph</field>
         <field name="model">retail.profit</field>
         <field name="arch" type="xml">
             <graph string="Profit by Sale" type="bar">
-                <field name="sale_id" type="row"/>
-                <field name="profit_amount" type="measure"/>
+                <field name="sale_id" type="row" />
+                <field name="profit_amount" type="measure" />
             </graph>
         </field>
     </record>
@@ -79,5 +77,5 @@
         name="Profit"
         parent="menu_retail_shop"
         sequence="5"
-        action="action_profit"/>
+        action="action_profit" />
 </odoo>
